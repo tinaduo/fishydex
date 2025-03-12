@@ -1,35 +1,44 @@
-var express = require("express");
-var app = express();
+import express from "express";
+import { createClient } from "@supabase/supabase-js";
 
-const temp_fish = [
-  {
-    name: "angler",
-    number: 0,
-    description: "Lorem Ipsum",
-    type: "Fish",
-    hp: "1",
-    atk: "1",
-    def: "1",
-  },
-];
+const app = express();
 
-// set the view engine to ejs
 app.set("view engine", "ejs");
-
 app.use(express.static("public"));
 
-// index page
+const DB_URL = "https://xqtteqvdlgpyindqtpll.supabase.co";
+const ANON_KEY =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhxdHRlcXZkbGdweWluZHF0cGxsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDE3NTgxMjAsImV4cCI6MjA1NzMzNDEyMH0.44CqEyliLeUo-DDcyUF0v8WJO_TfyCPKnuYLP4O-Wv8";
+
+const supabase = createClient(DB_URL, ANON_KEY);
+
+// Fetch fish data from the "fish" table
+async function fishCall() {
+  const { data: fish, error } = await supabase.from("fish").select("*");
+  if (error) {
+    console.log("Error fetching fish data:", error);
+  } else {
+    console.log(fish)
+  }
+
+  return fish;
+}
+
 app.get("/", function (req, res) {
   res.render("pages/index");
 });
 
-app.get("/fish", function (req, res) {
-  const user = {
-    skills: ["a", "b", "c"],
-  };
-
-  res.render("pages/fish", { user });
+// Fetch fish data and pass it to the fish.ejs template
+app.get("/fish", async function (req, res) {
+  const fishData = await fishCall();
+  res.render("pages/fish", { data: fishData });
 });
 
-app.listen(8080);
-console.log("Server is listening on port 8080");
+app.get("/testing", async function (req, res) {
+  const fishData = await fishCall();
+  res.render("pages/testing", { data: fishData });
+});
+
+app.listen(8080, () => {
+  console.log("Server is listening on port 8080");
+});
