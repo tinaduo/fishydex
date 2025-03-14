@@ -1,0 +1,5 @@
+"id","name","description","type","hp","atk","def"
+7,"Angler","a deep-sea fish known for its bioluminescent lure","Fish",1,1,1
+8,"Clownfish","a small brightly colored fish often seen in coral reefs","Fish",2,1,2
+9,"Goldfish","a small ornamental fish often kept in aquariums","Fish",2,2,1
+10,"Shark","a large predatory fish with sharp teeth found in oceans","Fish",10,8,5
