@@ -1,14 +1,16 @@
 import express from "express";
 import { createClient } from "@supabase/supabase-js";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const app = express();
 
 app.set("view engine", "ejs");
 app.use(express.static("public"));
 
-const DB_URL = "https://xqtteqvdlgpyindqtpll.supabase.co";
-const ANON_KEY =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhxdHRlcXZkbGdweWluZHF0cGxsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDE3NTgxMjAsImV4cCI6MjA1NzMzNDEyMH0.44CqEyliLeUo-DDcyUF0v8WJO_TfyCPKnuYLP4O-Wv8";
+const DB_URL = process.env.SUPABASE_URL;
+const ANON_KEY = process.env.SUPABASE_ANON_KEY;
 
 const supabase = createClient(DB_URL, ANON_KEY);
 
