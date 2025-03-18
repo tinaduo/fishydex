@@ -1,21 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fish List</title>
-</head>
-<body>
-  <h1>Fish List</h1>
-  
-  <% if (data && data.length > 0) { %>
-    <ul>
-      <% data.forEach(f => { %>
-        <li><%= f.name %></li>
-      <% }) %>
-    </ul>
-  <% } else { %>
-    <p>No fish found.</p>
-  <% } %>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fish List</title>
+  </head>
+  <body>
+    <form action="/add" method="POST">
+      <input type="text" name="name" placeholder="Name" required />
+      <input
+        type="text"
+        name="description"
+        placeholder="Description"
+        required
+      />
+      <input type="text" name="type" placeholder="Type" required />
+      <input type="number" name="atk" placeholder="Attack" required />
+      <input type="number" name="def" placeholder="Defense" required />
+      <input type="number" name="hp" placeholder="HP" required />
+      <button type="submit">Add Fish</button>
+    </form>
+  </body>
 </html>
