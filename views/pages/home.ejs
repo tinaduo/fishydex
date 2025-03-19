@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FishyDex</title>
+</head>
+<body>
+    <div class="fish-grid">
+    <% if (data && data.length > 0) { %>
+        <ul>
+        <% data.forEach(f => { %>
+            <li>
+                <p><%= f.name %></p>
+                <p>#<%= f.id %></p>
+            </li>
+        <% }) %>
+        </ul>
+    <% } else { %>
+        <p>No fish found.</p>
+    <% } %>
+    </div>
+</body>
+</html>
