@@ -40,6 +40,10 @@ app.get("/home", async function (req, res) {
   res.render("pages/home", { data: fishData });
 });
 
+app.get("/project-info", function (req, res) {
+  res.render("pages/project-info");
+});
+
 // fetch fish data and pass it to the fish
 app.post("/add", async (req, res) => {
   try {
