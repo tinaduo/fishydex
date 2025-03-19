@@ -58,7 +58,7 @@ app.post("/add", async (req, res) => {
     }
 
     console.log("Data inserted:", data);
-    res.redirect("/");
+    res.redirect("/home");
   } catch (err) {
     console.error("Unexpected error:", err);
     res.status(500).send("Unexpected server error");
