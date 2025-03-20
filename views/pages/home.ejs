@@ -10,12 +10,14 @@
     <div class="fish-grid">
     <% if (data && data.length > 0) { %>
         <ul>
-        <% data.forEach(f => { %>
-            <li>
-                <p><%= f.name %></p>
-                <p>#<%= f.id %></p>
-            </li>
-        <% }) %>
+            <% data.forEach(f => { %>
+                <li>
+                    <a href="/fish/<%= f.id %>">
+                        <p><%= f.name %></p>
+                        <p>#<%= f.id %></p>
+                    </a>
+                </li>
+            <% }) %>
         </ul>
     <% } else { %>
         <p>No fish found.</p>
