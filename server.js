@@ -69,6 +69,18 @@ app.post("/add", async (req, res) => {
   }
 });
 
+app.get("/fish/:id", async function (req, res) {
+  const fishId = req.params.id;
+  const { data: fish, error } = await supabase.from("fish").select("*").eq("id", fishId).single();
+
+  if (error) {
+      console.error("Error fetching fish data:", error);
+      return res.status(500).send("Error fetching fish data");
+  }
+
+  res.render("pages/fish", { fish });
+});
+
 app.listen(8080, () => {
   console.log("Server is listening on port 8080");
 });
