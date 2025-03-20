@@ -93,3 +93,111 @@ h1 {
     display: flex;
     gap: 300px;
 }
+
+/* Nintendo 3DS styles */
+.ds-container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+  .nintendo-3ds {
+    background-image: url("/images/nintendo3ds.png");
+    width: 800px;
+    height: 791px;
+}
+
+/* Top screen content */
+.top-screen {
+    /* these are needed to keep it in the right place */
+    position: relative;
+    left: 114px;
+    top: 56px;
+    width: 583px;
+    height: 304px;
+    background-color: #a1a1a1;
+}
+
+.fish-image {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: auto;
+    overflow: hidden;
+}
+  
+.fish-image img {
+    max-width: 90%;
+    max-height: 400px;
+}
+  
+.fish-name {
+    color: black;
+    text-align: center;
+    padding: 8px;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+  
+/* Bottom screen content */
+.bottom-screen {
+    /* these are needed to keep it in the right place */
+    position: relative;
+    top: 195px; 
+    left: 191px;
+    width: 405px;
+    height: 252px;
+    background-color: #2a407b;
+    border-radius: 5px;
+}
+.stats-container {
+    background-color: #a1a1a1;
+    border-radius: 5px;
+    padding: 5px;
+}
+  
+.type-badge {
+    background-color: #72c3fc;
+    color: white;
+    padding: 5px 10px;
+    margin: 5px 0;
+    display: inline-block;
+    border-radius: 5px;
+    font-size: 12px;
+}
+  
+.stat-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    border-bottom: 2px dotted #555;
+    padding-bottom: 5px;
+}
+  
+.description {
+    background-color: #d1d1d1;
+    color: black;
+    border: 2px solid #555;
+    padding: 7px;
+    margin-top: 10px;
+    font-size: 12px;
+    line-height: 1.4;
+}
+  
+.back-button {
+    background-color: #3c59a5;
+    color: white;
+    text-decoration: none;
+    padding: 8px 15px;
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+    border-radius: 5px;
+    font-size: 12px;
+    border: 2px solid #2a407b;
+}
+  
+.back-button:hover {
+    background-color: #2a407b;
+}
