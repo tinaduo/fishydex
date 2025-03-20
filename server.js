@@ -34,7 +34,6 @@ app.get("/add", function (req, res) {
   res.render("pages/add");
 });
 
-
 app.get("/home", async function (req, res) {
   const fishData = await fishCall();
   res.render("pages/home", { data: fishData });

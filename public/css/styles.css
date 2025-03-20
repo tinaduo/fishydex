@@ -31,6 +31,10 @@ h1 {
     font-size: 40px;
 }
 
+p {
+    margin: 0px;
+}
+
 .team-member {
     display: flex;
     min-width: 400px;
@@ -92,4 +96,37 @@ h1 {
 .button-container {
     display: flex;
     gap: 300px;
+}
+
+.fish-card {
+    display: flex;
+    flex-direction: row;
+    color: #fff;
+    text-decoration: none;
+}
+
+.fish-card:hover {
+    color: #b53129;
+}
+
+.fish-card-info {
+    display: flex;
+    flex-direction: column;
+    padding-left: 20px;
+}
+
+.fish-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    row-gap: 178px;
+}
+
+.fish-id {
+    padding-top: 12px;
+}
+
+.nav-bar {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
 }
