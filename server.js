@@ -1,6 +1,8 @@
 import express from "express";
 import { createClient } from "@supabase/supabase-js";
 import dotenv from "dotenv";
+import multer from 'multer';
+const upload = multer();
 
 dotenv.config();
 
@@ -43,24 +45,40 @@ app.get("/project-info", function (req, res) {
   res.render("pages/project-info");
 });
 
-// fetch fish data and pass it to the fish
-app.post("/add", async (req, res) => {
+
+app.post("/add", upload.single("imageURL"), async (req, res) => {
   try {
-    const { name, description, type, atk, def, hp } = req.body;
-
-    // debugging log the received data
-    console.log("Received data:", req.body);
-
-    const { data, error } = await supabase.from("fish").insert([
-      { name, description, type, atk, def, hp }
-    ]);
-
-    if (error) {
-      console.error("Error inserting data:", error);
-      return res.status(500).send("Database insert error: " + error.message);
+    if (!req.file) {
+      return res.status(400).send("No file uploaded.");
     }
 
-    console.log("Data inserted:", data);
+    const { name, description, type, atk, def, hp} = req.body;
+
+    const fileBuffer = req.file.buffer;
+    const fileName = `${Date.now()}-${req.file.originalname}`;
+
+    const { data, error } = await supabase.storage
+      .from("uploads")
+      .upload(fileName, fileBuffer, {
+        contentType: req.file.mimetype,
+      });
+
+    if (error) {
+      console.error("Error uploading image:", error);
+      return res.status(500).send("Image upload error: " + error.message);
+    }
+    const imageURL = `https://xqtteqvdlgpyindqtpll.supabase.co/storage/v1/object/public/uploads/${fileName}`;
+
+
+    const { data: fishData, error: dbError } = await supabase
+      .from("fish")
+      .insert([{ name, description, type, atk, def, hp, imageURL }]);
+
+    if (dbError) {
+      console.error("Error inserting data into DB:", dbError);
+      return res.status(500).send("Database insert error: " + dbError.message);
+    }
+
     res.redirect("/home");
   } catch (err) {
     console.error("Unexpected error:", err);
