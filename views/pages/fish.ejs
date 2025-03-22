@@ -1,20 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= fish.name %></title>
-    <link href="/css/styles.css" rel="stylesheet" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= fish.name %></title>
+  <link href="/css/styles.css" rel="stylesheet" />
 </head>
 <body>
-    <div class="fish-details">
-        <img src="<%= fish.imageURL %>" alt="<%= fish.name %> image" />
-        <p>Description: <%= fish.description %></p>
-        <p>Type: <%= fish.type %></p>
-        <p>HP: <%= fish.hp %></p>
-        <p>ATK: <%= fish.atk %></p>
-        <p>DEF: <%= fish.def %></p>
-        <a href="/home">Back to Fish List</a>
+  <div class="ds-container">
+    <div class="nintendo-3ds">
+      <div class="top-screen">
+        <div class="fish-name"><%= fish.name %></div>
+        <div class="fish-image">
+          <img src="<%= fish.imageURL %>" alt="<%= fish.name %> image" />
+        </div>
+      </div>
+          
+      <div class="bottom-screen">
+        <div class="stats-container">
+          <div class="type-badge"><%= fish.type %></div>
+          
+          <div class="stat-row">
+            <span>HP</span>
+            <span><%= fish.hp %></span>
+          </div>
+          
+          <div class="stat-row">
+            <span>ATK</span>
+            <span><%= fish.atk %></span>
+          </div>
+          
+          <div class="stat-row">
+            <span>DEF</span>
+            <span><%= fish.def %></span>
+          </div>
+          
+          <div class="description">
+            <%= fish.description %>
+          </div>
+          
+          <a href="/home" class="back-button">BACK</a>
+        </div>
+      </div>
     </div>
+  </div>
+  
 </body>
 </html>
