@@ -41,12 +41,13 @@
             <div class="fish-grid">
                 <% if (data && data.length > 0) { %>
                     <% data.forEach(f => { %>
-                        <div class="fish-card">
+                        <div>
                             <a class="fish-card" onclick="playClick('/fish/<%= f.id %>')">
                             <img class="fish-img" src="<%= f.imageURL || '/images/placeholder.gif' %>" alt=" image of <%= f.name %>" />
                             <div class="fish-card-info">
                                 <p class="fish-name"><%= f.name %></p>
-                                <p class="fish-id">#<%= f.id %></p>
+                                <!-- <p class="fish-id">#<%= f.id %></p> -->
+                                <p class="fish-id"> Learn more about me</p>
                             </div>
                             </a>
                         </div>
