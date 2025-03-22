@@ -14,7 +14,7 @@
     </nav>
     <div class="main-container">
         <div class="fish-grid">
-        <% if (data && data.length > 0) { %>
+            <% if (data && data.length > 0) { %>
                 <% data.forEach(f => { %>
                     <div class="fish-card">
                         <a  class="fish-card" href="/fish/<%= f.id %>">
@@ -26,10 +26,10 @@
                         </a>
                     </div>
                 <% }) %>
-        <% } else { %>
-            <p>No fish found.</p>
-        <% } %>
-    </div>
+            <% } else { %>
+                <p>No fish found.</p>
+            <% } %>
+        </div>
     </div>
 </body>
 </html>
