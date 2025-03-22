@@ -6,14 +6,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Fishydex</title>
     <link href="/css/styles.css" rel="stylesheet" />
+    <style>
+      .hidden {
+        display: none;
+      }
+
+    </style>
   </head>
 
   <body class="index-container">
-    <img src="/images/logo.png" alt="fishydex logo" class="logo" />
+    <div id="landingPage" class="landing-container">
+      <img src="/images/logo.png" alt="fishydex logo" class="logo" />
+      <button class="btn" onclick="enterFishydex()">Explore Fishies!</button>
+    </div>
+
+    <div id="mainContent" class="index-container hidden">
+      <img src="/images/logo.png" alt="fishydex logo" class="logo" />
     
-    <section button="button-container">
-      <button class="btn" onclick="window.location.href='/home'">Get started</button>
-      <button class="btn" onclick="window.location.href='/project-info'">project info</button>
-    </section>
+      <section id="button-container">
+        <!-- <button class="btn" onclick="window.location.href='/home'">Get started</button>
+        <button class="btn" onclick="window.location.href='/project-info'">project info</button> -->
+        <button class="btn" onclick="playClick('/home')">Get started</button>
+        <button class="btn" onclick="playClick('/project-info')">Project info</button>
+      </section>
+      <audio id="click" src="/sounds/click.mp3"></audio>
+      <audio id="music" src="/sounds/pokemon.mp3" autoplay loop></audio>
+      <script>
+        document.addEventListener("click", () => {
+          const audio = document.getElementById("music");
+          if (audio.paused) {
+            audio.play().catch((error) => console.log("Still blocked:", error));
+          }
+        });
+
+        function enterFishydex() {
+          document.getElementById("landingPage").classList.add("hidden");
+          const mainContent = document.getElementById("mainContent");
+          mainContent.classList.remove("hidden");
+          mainContent.classList.add("fade-in");
+
+          const audio = document.getElementById("music");
+          if (audio.paused) {
+            audio.play().catch((e) => console.log("Autoplay blocked:", e));
+          }
+        }
+  
+        function playClick(destination) {
+          const clickSound = document.getElementById("click");
+  
+          clickSound.currentTime = 0;
+          clickSound.play().catch((e) => console.log("Click sound blocked:", e));
+  
+          setTimeout(() => {
+            window.location.href = destination;
+          }, 200);
+        }
+      </script>
+    </div>
   </body>
 </html>
