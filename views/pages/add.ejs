@@ -4,16 +4,26 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Add Fish</title>
+    <link href="/css/styles.css" rel="stylesheet" />
 </head>
 <body>
-<form action="/add" method="POST">
-    <input type="text" name="name" placeholder="Name" required />
-    <input type="text" name="description" placeholder="Description" required />
-    <input type="text" name="type" placeholder="Type" required />
-    <input type="number" name="atk" placeholder="Attack" required />
-    <input type="number" name="def" placeholder="Defense" required />
-    <input type="number" name="hp" placeholder="HP" required />
-    <button type="submit">Submit Fish</button>
-</form>
+
+    <nav class="nav-bar">
+        <button class="btn" onclick="window.location.href='/home'">< back</button>
+    </nav>
+
+    <div class="main-container">
+        <form class="form-grid" action="/add" method="POST" enctype="multipart/form-data"  >
+                <input class="file-upload" type="file" name="imageURL"  placeholder="Image URL" required id="imageUpload" />
+                <input class="inputs" type="text" name="name" placeholder="Name" required />
+                <input class="inputs" type="text" name="description" placeholder="Description" required />
+                <input class="inputs" type="text" name="type" placeholder="Type" required />
+                <input class="inputs" type="number" name="atk" placeholder="Attack" required />
+                <input class="inputs" type="number" name="def" placeholder="Defense" required />
+                <input class="inputs" type="number" name="hp" placeholder="HP" required />
+                <button class="btn-submit" type="submit">ADD Fish</button>
+        </form>
+    </div>
+
 </body>
 </html>

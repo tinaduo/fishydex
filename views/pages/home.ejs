@@ -7,21 +7,29 @@
     <link href="/css/styles.css" rel="stylesheet" />
 </head>
 <body>
-    <div class="fish-grid">
-    <% if (data && data.length > 0) { %>
-        <ul>
-            <% data.forEach(f => { %>
-                <li>
-                    <a href="/fish/<%= f.id %>">
-                        <p><%= f.name %></p>
-                        <p>#<%= f.id %></p>
-                    </a>
-                </li>
-            <% }) %>
-        </ul>
-    <% } else { %>
-        <p>No fish found.</p>
-    <% } %>
+    <nav class="nav-bar">
+        <button class="btn" onclick="window.location.href='/'">< back</button>
+        <img src="/images/logo.png" alt="fishydex logo" class="logo" height="75" />
+        <button class="btn" onclick="window.location.href='/add'">add +</button>
+    </nav>
+    <div class="main-container">
+        <div class="fish-grid">
+        <% if (data && data.length > 0) { %>
+                <% data.forEach(f => { %>
+                    <div class="fish-card">
+                        <a  class="fish-card" href="/fish/<%= f.id %>">
+                        <img class="fish-img" src="<%= f.imageURL || '/images/placeholder.gif' %>" alt=" image of <%= f.name %>" />
+                        <div class="fish-card-info">
+                            <p class="fish-name"><%= f.name %></p>
+                            <p class="fish-id">#<%= f.id %></p>
+                        </div>
+                        </a>
+                    </div>
+                <% }) %>
+        <% } else { %>
+            <p>No fish found.</p>
+        <% } %>
+    </div>
     </div>
 </body>
 </html>
