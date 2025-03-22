@@ -8,7 +8,7 @@
   </head>
   <body>
     <nav class="nav-bar">
-        <button class="btn" onclick="window.location.href='/'">< back</button>
+        <button class="btn" onclick="playBack('/')">< back</button>
         <img src="/images/logo.png" alt="fishydex logo" class="logo" height="75" />
         <button class="btn">:]</button>
     </nav>
@@ -59,5 +59,17 @@
             </div>
         </section>
     </div>
+    <audio id="back" src="/sounds/BackSound.mp3"></audio>
+    <script>  
+        function playBack(destination) {
+          const backSound = document.getElementById("back");
+          backSound.currentTime = 0;
+          backSound.play().catch((e) => console.log("Back sound blocked:", e));
+  
+          setTimeout(() => {
+            window.location.href = destination;
+          }, 2200);
+        }
+      </script>
   </body>
 </html>

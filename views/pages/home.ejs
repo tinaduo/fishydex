@@ -5,31 +5,91 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FishyDex</title>
     <link href="/css/styles.css" rel="stylesheet" />
+    <style>
+        .hidden {
+          display: none;
+        }
+
+        .main-container-home {
+            width: 100%;
+        }
+  
+        .fade-in {
+          animation: fadeIn 0.8s ease-in-out;
+        }
+  
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+      </style>
 </head>
 <body>
-    <nav class="nav-bar">
-        <button class="btn" onclick="window.location.href='/'">< back</button>
-        <img src="/images/logo.png" alt="fishydex logo" class="logo" height="75" />
-        <button class="btn" onclick="window.location.href='/add'">add +</button>
-    </nav>
-    <div class="main-container">
-        <div class="fish-grid">
-            <% if (data && data.length > 0) { %>
-                <% data.forEach(f => { %>
-                    <div class="fish-card">
-                        <a  class="fish-card" href="/fish/<%= f.id %>">
-                        <img class="fish-img" src="<%= f.imageURL || '/images/placeholder.gif' %>" alt=" image of <%= f.name %>" />
-                        <div class="fish-card-info">
-                            <p class="fish-name"><%= f.name %></p>
-                            <p class="fish-id">#<%= f.id %></p>
+
+    <!-- <div id="landingPage" class="landing-container">
+        <img src="/images/logo.png" alt="fishydex logo" class="logo" />
+        <button class="btn" onclick="enterFishydex()">Explore Fishies!</button>
+    </div> -->
+
+    <div id="mainContent" class="main-container-home">
+        <nav class="nav-bar">
+            <button class="btn" onclick="playBack('/')">< back</button>
+            <img src="/images/logo.png" alt="fishydex logo" class="logo" height="75" />
+            <button class="btn" onclick="window.location.href='/add'">add +</button>
+        </nav>
+        <div class="main-container">
+            <div class="fish-grid">
+                <% if (data && data.length > 0) { %>
+                    <% data.forEach(f => { %>
+                        <div class="fish-card">
+                            <a class="fish-card" onclick="playClick('/fish/<%= f.id %>')">
+                            <img class="fish-img" src="<%= f.imageURL || '/images/placeholder.gif' %>" alt=" image of <%= f.name %>" />
+                            <div class="fish-card-info">
+                                <p class="fish-name"><%= f.name %></p>
+                                <p class="fish-id">#<%= f.id %></p>
+                            </div>
+                            </a>
                         </div>
-                        </a>
-                    </div>
-                <% }) %>
-            <% } else { %>
-                <p>No fish found.</p>
-            <% } %>
+                    <% }) %>
+                <% } else { %>
+                    <p>No fish found.</p>
+                <% } %>
+            </div>
         </div>
     </div>
+    <audio id="click" src="/sounds/sound1.mp3"></audio>
+    <audio id="back" src="/sounds/BackSound.mp3"></audio>
+    <audio id="music" src="/sounds/driftveil-city.mp3" autoplay loop></audio>
+    <script>
+        document.addEventListener("click", () => {
+          const audio = document.getElementById("music");
+          if (audio.paused) {
+            audio.play().catch((error) => console.log("Still blocked:", error));
+          }
+        });
+
+        const audio = document.getElementById("music");
+        audio.volume = 0.3;
+  
+        function playClick(destination) {
+          const clickSound = document.getElementById("click");
+          clickSound.currentTime = 0;
+          clickSound.play().catch((e) => console.log("Click sound blocked:", e));
+  
+          setTimeout(() => {
+            window.location.href = destination;
+          }, 500);
+        }
+  
+        function playBack(destination) {
+          const backSound = document.getElementById("back");
+          backSound.currentTime = 0;
+          backSound.play().catch((e) => console.log("Back sound blocked:", e));
+  
+          setTimeout(() => {
+            window.location.href = destination;
+          }, 2200);
+        }
+      </script>
 </body>
 </html>

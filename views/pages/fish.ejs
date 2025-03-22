@@ -39,11 +39,23 @@
             <%= fish.description %>
           </div>
           
-          <a href="/home" class="back-button">BACK</a>
+          <a onclick="playClick('/home/')" class="back-button">BACK</a>
         </div>
       </div>
     </div>
   </div>
-  
+  <audio id="click" src="/sounds/sound2.mp3"></audio>
+  <script>
+    function playClick(destination) {
+      const clickSound = document.getElementById("click");
+
+      clickSound.currentTime = 0.3;
+      clickSound.play().catch((e) => console.log("Click sound blocked:", e));
+
+      setTimeout(() => {
+        window.location.href = destination;
+      }, 500);
+    }
+  </script>
 </body>
 </html>
