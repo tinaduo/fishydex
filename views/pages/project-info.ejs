@@ -12,7 +12,7 @@
         <img src="/images/logo.png" alt="fishydex logo" class="logo" height="75" />
         <button class="btn">:]</button>
     </nav>
-    <div class="main-container">
+    <div id="mainContent" class="main-container">
         <section>
             <h1>PROJECT INFO</h1>
             <p>
@@ -60,21 +60,24 @@
         </section>
     </div>
     <audio id="back" src="/sounds/BackSound.mp3"></audio>
-    <audio id="music" src="/sounds/poke-dance.mp3" autoplay loop></audio>
+    <audio id="music" src="/sounds/poke-dance.mp3" controls autoplay loop></audio>
     <script>
-        const audio = document.getElementById("music");
-        audio.volume = 0.2; 
+        window.addEventListener("DOMContentLoaded", () => {
+            const audio = document.getElementById("music");
+            audio.volume = 0.2;
+            audio.play()
+        });
 
         function playBack(destination) {
-          const backSound = document.getElementById("back");
-          backSound.currentTime = 0;
-          backSound.volume = 0.4;
-          backSound.play().catch((e) => console.log("Back sound blocked:", e));
-  
-          setTimeout(() => {
+            const backSound = document.getElementById("back");
+            backSound.currentTime = 0;
+            backSound.volume = 0.4;
+            backSound.play().catch((e) => console.log("Back sound blocked:", e));
+
+            setTimeout(() => {
             window.location.href = destination;
-          }, 2200);
+            }, 2200);
         }
-      </script>
+    </script>
   </body>
 </html>
