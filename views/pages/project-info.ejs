@@ -60,7 +60,11 @@
         </section>
     </div>
     <audio id="back" src="/sounds/BackSound.mp3"></audio>
-    <script>  
+    <audio id="music" src="/sounds/poke-dance.mp3" autoplay loop></audio>
+    <script>
+        const audio = document.getElementById("music");
+        audio.volume = 0.2; 
+
         function playBack(destination) {
           const backSound = document.getElementById("back");
           backSound.currentTime = 0;
