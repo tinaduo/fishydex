@@ -64,6 +64,7 @@
         function playBack(destination) {
           const backSound = document.getElementById("back");
           backSound.currentTime = 0;
+          backSound.volume = 0.4;
           backSound.play().catch((e) => console.log("Back sound blocked:", e));
   
           setTimeout(() => {
