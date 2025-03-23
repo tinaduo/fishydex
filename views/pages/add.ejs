@@ -1,29 +1,185 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Add Fish</title>
     <link href="/css/styles.css" rel="stylesheet" />
-</head>
-<body>
-
+  </head>
+  <body>
     <nav class="nav-bar">
-        <button class="btn" onclick="window.location.href='/home'">< back</button>
+      <button class="btn" onclick="confirmBack()">< back</button>
     </nav>
 
     <div class="main-container">
-        <form class="form-grid" action="/add" method="POST" enctype="multipart/form-data"  >
-                <input class="file-upload" type="file" name="imageURL"  placeholder="Image URL" required id="imageUpload" />
-                <input class="inputs" type="text" name="name" placeholder="Name" required />
-                <input class="inputs" type="text" name="description" placeholder="Description" required />
-                <input class="inputs" type="text" name="type" placeholder="Type" required />
-                <input class="inputs" type="number" name="atk" placeholder="Attack" required />
-                <input class="inputs" type="number" name="def" placeholder="Defense" required />
-                <input class="inputs" type="number" name="hp" placeholder="HP" required />
-                <button class="btn-submit" type="submit">ADD Fish</button>
-        </form>
+      <form
+        class="form-grid"
+        action="/add"
+        method="POST"
+        enctype="multipart/form-data"
+      >
+        <div class="image-container">
+          <input
+            class="file-upload"
+            type="file"
+            name="image"
+            placeholder="Image"
+            id="imageUpload"
+            required
+          />
+          <div class="image-preview" id="imagePreview"></div>
+          <div class="error-messages-container"></div>
+        </div>
+        <div class="form-container">
+          <input
+            class="inputs"
+            type="text"
+            name="name"
+            placeholder="Name"
+            required
+          />
+          <input
+            class="inputs"
+            type="text"
+            name="description"
+            placeholder="Description"
+            required
+          />
+          <input
+            class="inputs"
+            type="text"
+            name="type"
+            placeholder="Type"
+            required
+          />
+          <input
+            class="inputs"
+            type="number"
+            name="atk"
+            placeholder="Attack"
+            required
+          />
+          <input
+            class="inputs"
+            type="number"
+            name="def"
+            placeholder="Defense"
+            required
+          />
+          <input
+            class="inputs"
+            type="number"
+            name="hp"
+            placeholder="HP"
+            required
+          />
+          <button class="btn-submit" type="submit">ADD Fish</button>
+        </div>
+      </form>
     </div>
-
-</body>
+  </body>
 </html>
+
+<script>
+  // image upload preview
+  const imageUpload = document.getElementById("imageUpload");
+  const imagePreview = document.getElementById("imagePreview");
+
+  imageUpload.addEventListener("change", function () {
+    const file = this.files[0];
+    console.log(file);
+    if (file) {
+      const reader = new FileReader();
+
+      reader.onload = function () {
+        const result = reader.result;
+        imagePreview.style.backgroundImage = `url(${result})`;
+      };
+
+      reader.readAsDataURL(file);
+    }
+  });
+
+  function replaceValidationUI(form) {
+    // doesnt show the default bubbles
+    form.addEventListener(
+      "invalid",
+      function (event) {
+        event.preventDefault();
+      },
+      true
+    );
+
+    form.addEventListener("submit", function (event) {
+      if (!this.checkValidity()) {
+        event.preventDefault();
+      }
+    });
+
+    var submitButton = form.querySelector(
+      "button:not([type=button]), input[type=submit]"
+    );
+    submitButton.addEventListener("click", function (event) {
+      var invalidFields = form.querySelectorAll(":invalid"),
+        errorMessagesContainer = form.querySelector(
+          ".error-messages-container"
+        );
+
+      // clear any existing error messages
+      errorMessagesContainer.innerHTML = "";
+
+      // only show errors if fields are invalid
+      if (invalidFields.length > 0) {
+        var missingFields = [];
+
+        // loop through invalid fields and collect their names
+        for (var i = 0; i < invalidFields.length; i++) {
+          var fieldName =
+            invalidFields[i].getAttribute("name") || "Unnamed Field";
+          var fieldPlaceholder = invalidFields[i].getAttribute("placeholder");
+
+          // push the field name to the missing fields list
+          if (!missingFields.includes(fieldPlaceholder)) {
+            missingFields.push(fieldPlaceholder);
+          }
+        }
+
+        // create the error message
+        var errorMessage =
+          "<div class='error-container'>" +
+          "<img src='/images/interface-essential-alert-circle-1--Streamline-Pixel.svg' alt='Error Icon'/>" +
+          "<div class='error-message'> <p class='error-header'>Please fill out the following fields</p>";
+
+        // joins missing fields into a comma separated list
+        var fieldsList = missingFields.join(", ");
+
+        // insert the fields into the error message
+        errorMessage += fieldsList + "</div></div>";
+
+        // insert the error message into the error messages container
+        errorMessagesContainer.innerHTML = errorMessage;
+      }
+
+      // if there are errors, give focus to the first invalid field
+      if (invalidFields.length > 0) {
+        invalidFields[0].focus();
+      }
+    });
+  }
+
+  // replaces the default validation UI with a custom one
+  var forms = document.querySelectorAll("form");
+  for (var i = 0; i < forms.length; i++) {
+    replaceValidationUI(forms[i]);
+  }
+
+  // confirm dialog for the back button
+  function confirmBack() {
+    const confirmAction = window.confirm(
+      "Are you sure you want to go back? Your changes may not be saved."
+    );
+    if (confirmAction) {
+      window.location.href = "/home"; // go back to the home page
+    }
+  }
+</script>
